@@ -1,15 +1,17 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import { goToFeed, goToSignUp } from '../../routes/cordinator'
 import { ButtonContinue, ButtonSignIn } from '../../components/Button/ButtonStyles'
-import Header from '../../components/Header/Header'
 import { Input } from '../../components/Input/InputStyles'
 import { ButtonDiv, Container, Hr, Image, InputDiv, LogoDiv, Text } from './LoginStyles'
 import logo from '../../assets/logoLogin.png'
 
 const LoginScreen = () => {
+
+  const navigate = useNavigate()
+
   return (
     <Container>
-
-      <Header/>
 
       <LogoDiv>
         <Image src={logo}/>
@@ -22,9 +24,9 @@ const LoginScreen = () => {
       </InputDiv>
 
       <ButtonDiv>
-        <ButtonContinue>Continuar</ButtonContinue>
+        <ButtonContinue onClick={() => {goToFeed(navigate)}}>Continuar</ButtonContinue>
         <Hr></Hr>
-        <ButtonSignIn>Crie uma conta!</ButtonSignIn>
+        <ButtonSignIn onClick={() => {goToSignUp(navigate)}}>Crie uma conta!</ButtonSignIn>
       </ButtonDiv>
       
     </Container>
