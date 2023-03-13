@@ -62,4 +62,11 @@ export const ButtonPost = styled.button`
     background: linear-gradient(90deg, #FF6489 0%, #F9B24E 100%), #4088CB;
     border-radius: 12px;
     border: none;
+
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 23px;
+
+    color: #FFFFFF;
 `

@@ -7,4 +7,25 @@ export const Input = styled.input`
     width: 360px;
     height: 60px;
     
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    padding-left: 5px;
+    
+`
+export const PostInput = styled.input`
+    width: 360px;
+    height: 131px;
+    left: 30px;
+    top: 126px;
+
+    background: #EDEDED;
+    border-radius: 12px;
+    border: none;
+    color: #6F6F6F;
+
+    font-size: 14px;
+    text-justify: justify;
+    
 `

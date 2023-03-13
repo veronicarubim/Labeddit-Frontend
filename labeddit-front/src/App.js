@@ -1,9 +1,10 @@
 import LoginScreen from "./pages/LoginScreen/LoginScreen";
+import Router from "./routes/Router";
 
 function App() {
   return (
     <div>
-      <LoginScreen/>
+      <Router/>
     </div>
   );
 }

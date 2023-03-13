@@ -2,15 +2,29 @@ import React from 'react'
 import { Container, Image, LogOut, Button } from './HeaderStyles'
 import logo from '../../assets/logo.png'
 import x from '../../assets/x.png'
+import { goToFeed, goToLogin } from '../../routes/cordinator'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 const Header = () => {
+
+  const navigate = useNavigate()
+  const location = useLocation()
+
   return (
     <Container>
-      <Button>
-        <Image src={x}/>
-      </Button> 
+
+      {
+      location.pathname === "/post" ? 
+      (<Button onClick={() => {goToFeed(navigate)}}><Image src={x}/></Button>) : 
+      (null)
+      } 
       <Image src={logo}/>
-      <LogOut>Logout</LogOut>
+      {
+      location.pathname === "/signup" ? 
+      (<LogOut onClick={() => {goToLogin(navigate)}}>Entrar</LogOut>) : 
+      (<LogOut onClick={() => {goToLogin(navigate)}}>Sair</LogOut>)
+      }
+            
     </Container>
   )
 }
