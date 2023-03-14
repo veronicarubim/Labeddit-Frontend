@@ -13,6 +13,8 @@ export const ButtonContinue = styled.button`
     left: 29px;
     top: 587px;
 
+    font-family: 'Noto sans';
+    text-decoration: bold;
     font-style: normal;
     font-weight: 700;
     font-size: 18px;

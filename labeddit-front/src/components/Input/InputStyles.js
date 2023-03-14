@@ -14,7 +14,7 @@ export const Input = styled.input`
     padding-left: 5px;
     
 `
-export const PostInput = styled.input`
+export const PostInput = styled.textarea`
     width: 360px;
     height: 131px;
     left: 30px;

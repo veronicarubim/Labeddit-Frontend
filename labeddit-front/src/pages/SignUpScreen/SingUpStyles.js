@@ -7,7 +7,12 @@ export const Container = styled.div`
     justify-content: center;
 `
 export const Title = styled.h1`
-    font-size: 32px;
+    font-family: 'IBM Plex Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 33px;
+    line-height: 43px;
+
     color: #373737;
 
 `
