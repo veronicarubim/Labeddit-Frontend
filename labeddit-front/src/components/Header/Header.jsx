@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Image, LogOut, Button } from './HeaderStyles'
+import { Container, Image, LogOut, Button, ImageX } from './HeaderStyles'
 import logo from '../../assets/logo.png'
 import x from '../../assets/x.png'
 import { goToFeed, goToLogin } from '../../routes/cordinator'
@@ -15,7 +15,7 @@ const Header = () => {
 
       {
       location.pathname === "/post" ? 
-      (<Button onClick={() => {goToFeed(navigate)}}><Image src={x}/></Button>) : 
+      (<Button onClick={() => {goToFeed(navigate)}}><ImageX src={x}/></Button>) : 
       (null)
       } 
       <Image src={logo}/>

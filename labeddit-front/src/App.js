@@ -1,9 +1,10 @@
-import LoginScreen from "./pages/LoginScreen/LoginScreen";
+import { GlobalStyle } from "./GlobalStyled";
 import Router from "./routes/Router";
 
 function App() {
   return (
     <div>
+      <GlobalStyle/>
       <Router/>
     </div>
   );

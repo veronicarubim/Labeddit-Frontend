@@ -29,7 +29,6 @@ export const ButtonDiv = styled.div`
     justify-content: center;
     gap: 10px;
 `
-
 export const Hr = styled.hr`
     width: 363px;
     height: 0px;
@@ -51,7 +50,7 @@ export const Text = styled.p`
     left: 26px;
     top: 275px;
 
-    /* font-family: 'IBM Plex Sans'; */
+    font-family: 'IBM Plex Sans';
     font-style: normal;
     font-weight: 300;
     font-size: 16px;
