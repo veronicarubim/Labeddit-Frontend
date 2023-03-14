@@ -17,7 +17,6 @@ const Comment = () => {
                 <Button>
                     <Icon src={Dislike}></Icon>
                 </Button>
-                
             </LikeDiv>
         </LowerBar>
     </CommentContainer>

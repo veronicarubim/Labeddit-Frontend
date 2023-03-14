@@ -6,14 +6,15 @@ import Comment from '../../assets/comment.png'
 import { useNavigate } from 'react-router-dom'
 import { goToPost } from '../../routes/cordinator'
 
-const Post = () => {
+const Post = ({post}) => {
 
     const navigate = useNavigate()
 
   return (
+    
     <PostContainer>
         <Title>Enviado por </Title>
-        <Content>rada rada rada</Content>
+        <Content>{post.content}</Content>
         <LowerBar>
             <LikeDiv>
                 <Button>
