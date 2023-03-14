@@ -37,7 +37,6 @@ const FeedScreen = () => {
         <Published>
           {posts.map((post) => <Post post={post}/>)}
         </Published>
-        
 
     </Container>
   )
