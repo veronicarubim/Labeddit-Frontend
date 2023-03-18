@@ -20,8 +20,13 @@ const FeedScreen = () => {
     const newPost = {
       content: content
     }
+
+    if (newPost.content.length <= 1) {
+      alert('Você deve escrever algo para comentar')
+    } else {
       setPosts([newPost,...posts])
       setContent('')
+    }
   }
 
   return (

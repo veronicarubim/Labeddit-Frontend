@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { goToFeed, goToSignUp } from '../../routes/cordinator'
 import { ButtonContinue, ButtonSignIn } from '../../components/Button/ButtonStyles'
@@ -10,6 +10,16 @@ const LoginScreen = () => {
 
   const navigate = useNavigate()
 
+  const [email, setEmail] = useState('')
+  const [senha, setSenha] = useState('')
+
+  const handleEmail = (e) => {
+    setEmail(e.target.value)
+  }
+  const handlePassword = (e) => {
+    setSenha(e.target.value)
+  }
+
   return (
     <Container>
 
@@ -19,8 +29,8 @@ const LoginScreen = () => {
       </LogoDiv>
       
       <InputDiv>
-        <Input placeholder='E-mail'></Input>
-        <Input placeholder='Senha'></Input>
+        <Input type="email" placeholder='E-mail' value={email} onChange={handleEmail}></Input>
+        <Input type="password" placeholder='Senha' value={senha} onChange={handlePassword}></Input>
       </InputDiv>
 
       <ButtonDiv>
