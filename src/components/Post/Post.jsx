@@ -32,6 +32,7 @@ const Post = ({post}) => {
                 </Button>
                 <Text>23</Text>
             </CommentDiv>
+            <Button>Delete</Button>
         </LowerBar>
     </PostContainer>
   )
