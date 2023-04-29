@@ -4,6 +4,10 @@ import Header from '../../components/Header/Header'
 import { InputDiv } from '../LoginScreen/LoginStyles'
 import { Input } from '../../components/Input/InputStyles'
 import { ButtonContinue } from '../../components/Button/ButtonStyles'
+import { goToFeed } from '../../routes/cordinator'
+import { useNavigate } from 'react-router-dom'
+import { BASE_URL } from '../../utils/url'
+import axios from 'axios'
 
 const SignUp = () => {
 
@@ -11,6 +15,7 @@ const SignUp = () => {
   const [email, setEmail] = useState('')
   const [senha, setSenha] = useState('')
   const [users, setUsers] = useState([])
+  const navigate = useNavigate()
 
   const handleNickname = (e) => {
     setApelido(e.target.value)
@@ -23,27 +28,34 @@ const SignUp = () => {
   }
 
   const handleSubmit = (e) => {
-    
     e.preventDefault()
-    const newUser = {
-      apelido: apelido,
+    const body = {
+      name: apelido,
       email: email,
-      senha: senha
+      password: senha
     }
 
-    if(newUser.apelido.length <= 1) {
+    if(body.apelido.length <= 1) {
       alert("Caixas vazias!")
     } else {
-      setUsers([...users, newUser])
-    setApelido('')
-    setEmail('')
-    setSenha('')
-
-    console.log(users)
-    console.log(newUser)
+      setUsers([...users, body])
+      setApelido('')
+      setEmail('')
+      setSenha('')
     }
     
   }
+
+  const signUp = async () => {
+    try {
+      handleSubmit();
+      const response = await axios.post(`${BASE_URL}/users/signup`, handleSubmit());
+      window.localStorage.setItem("labeddit-token", response.data.token);
+      goToFeed(navigate);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Container>
@@ -68,7 +80,7 @@ const SignUp = () => {
             </InputDivSignup>
             
 
-            <ButtonContinue type="submit" onClick={handleSubmit}>Cadastrar</ButtonContinue>
+            <ButtonContinue type="submit" onClick={() => signUp()}>Cadastrar</ButtonContinue>
         </ContainerInput>
 
         

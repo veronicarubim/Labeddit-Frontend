@@ -7,13 +7,13 @@ const Comment = () => {
   return (
     <CommentContainer>
         <Title>Enviado por </Title>
-        <Content>rada rada rada</Content>
+        <Content></Content>
         <LowerBar>
             <LikeDiv>
                 <Button>
                     <Icon src={Like}></Icon>
                 </Button>
-                <Text>456</Text>
+                <Text></Text>
                 <Button>
                     <Icon src={Dislike}></Icon>
                 </Button>

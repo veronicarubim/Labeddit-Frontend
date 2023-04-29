@@ -1,14 +1,18 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { goToFeed, goToSignUp } from '../../routes/cordinator'
 import { ButtonContinue, ButtonSignIn } from '../../components/Button/ButtonStyles'
 import { Input } from '../../components/Input/InputStyles'
 import { ButtonDiv, Container, Hr, Image, InputDiv, LogoDiv, Text } from './LoginStyles'
 import logo from '../../assets/logoLogin.png'
+import { GlobalContext } from '../../context/GlobalContext'
+import axios from 'axios'
+import { BASE_URL } from '../../utils/url'
 
 const LoginScreen = () => {
 
   const navigate = useNavigate()
+  const context = useContext(GlobalContext)
 
   const [email, setEmail] = useState('')
   const [senha, setSenha] = useState('')
@@ -19,6 +23,28 @@ const LoginScreen = () => {
   const handlePassword = (e) => {
     setSenha(e.target.value)
   }
+
+  useEffect(() => {
+    if (context.isAuth) {
+      goToFeed(navigate)
+    }
+  })
+
+  const login = async () => {
+    try {
+      const body = {
+        email: email,
+        password: senha
+      }
+
+      const response = await axios.post(`${BASE_URL}/users/login`, body)
+      window.localStorage.setItem('labeddit-token', response.data.token)
+      goToFeed(navigate)
+      context.setIsAuth(true)
+    } catch (error) {
+      console.log(error)
+    }
+  };
 
   return (
     <Container>
@@ -34,7 +60,7 @@ const LoginScreen = () => {
       </InputDiv>
 
       <ButtonDiv>
-        <ButtonContinue onClick={() => {goToFeed(navigate)}}>Continuar</ButtonContinue>
+        <ButtonContinue onClick={login}>Continuar</ButtonContinue>
         <Hr></Hr>
         <ButtonSignIn onClick={() => {goToSignUp(navigate)}}>Crie uma conta!</ButtonSignIn>
       </ButtonDiv>

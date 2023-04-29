@@ -12,7 +12,6 @@ const PostScreen = () => {
     <Container>
         <Header/>
         <PostDiv>
-          <Post></Post>
           <PostInput placeholder='Escreva seu comentário...'></PostInput>
           <ButtonPost>Publicar</ButtonPost>
         </PostDiv>

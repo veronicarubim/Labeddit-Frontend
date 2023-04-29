@@ -1,46 +1,79 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { ButtonPost } from '../../components/Button/ButtonStyles'
 import Header from '../../components/Header/Header'
 import { PostInput } from '../../components/Input/InputStyles'
 import  Post  from '../../components/Post/Post'
 import { Hr } from '../LoginScreen/LoginStyles'
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import { Container, InnerContainer, Published } from './FeedScreenStyles'
+import { GlobalContext } from '../../context/GlobalContext'
+import { goToLogin } from '../../routes/cordinator'
+import { BASE_URL } from '../../utils/url'
 
 const FeedScreen = () => {
 
-  const [posts, setPosts] = useState([])
-  const [content, setContent] = useState('')
+  const navigate = useNavigate();
+  const context = useContext(GlobalContext);
+  const [content, setContent] = useState("");
+  const { posts, setPosts } = context;
 
-  const handleContent = (e) => {
-    setContent(e.target.value)
-  }
+  useEffect(() => {
+    findPosts();
+  });
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    const newPost = {
-      content: content
+  useEffect(() => {
+    const token = window.localStorage.getItem("labeddit-token");
+    if (!token) {
+      goToLogin(navigate);
     }
+  });
 
-    if (newPost.content.length <= 1) {
-      alert('Você deve escrever algo para comentar')
-    } else {
-      setPosts([newPost,...posts])
-      setContent('')
+  const findPosts = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}/posts`, {
+        headers: {
+          Authorization: window.localStorage.getItem("labeddit-token"),
+        },
+      });
+      setPosts(response.data);
+    } catch (error) {
+      console.log(error);
     }
-  }
+  };
+
+  const createPost = async () => {
+    try {
+      let body = {
+        content,
+      };
+      await axios.post(`${BASE_URL}/posts`, body, {
+        headers: {
+          Authorization: window.localStorage.getItem("labeddit-token"),
+        },
+      });
+      findPosts();
+      setContent("");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Container>
         <Header></Header>
 
         <InnerContainer>
-          <PostInput placeholder="Escreva seu post..." value={content} onChange={handleContent}></PostInput>
-          <ButtonPost onClick={handleSubmit}>Publicar</ButtonPost>
+          <PostInput value={content}
+          onChange={(e) => setContent(e.target.value)}
+          type="text"
+          placeholder="Escreva seu post..."></PostInput>
+          <ButtonPost onClick={() => createPost()}>Publicar</ButtonPost>
           <Hr></Hr>
         </InnerContainer>
 
         <Published>
-          {posts.map((post) => <Post post={post}/>)}
+          {posts.map((post) => <Post key={post.id} post={post} findPosts={findPosts}/>)}
         </Published>
 
     </Container>
