@@ -5,34 +5,67 @@ import Dislike from '../../assets/dislike.png'
 import Comment from '../../assets/comment.png'
 import { useNavigate } from 'react-router-dom'
 import { goToPost } from '../../routes/cordinator'
+import { BASE_URL } from '../../utils/url'
+import axios from 'axios'
 
-const Post = ({post}) => {
+const Post = (props) => {
 
     const navigate = useNavigate()
+    const { post, findPosts } = props;
+    const like = async (postId) => {
+    try {
+      let body = {
+        like: true,
+      };
+      await axios.put(`${BASE_URL}/posts/${postId}/like`, body, {
+        headers: {
+          Authorization: window.localStorage.getItem("labeddit-token"),
+        },
+      });
+      findPosts();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const dislike = async (postId) => {
+    try {
+      let body = {
+        like: false,
+      };
+      await axios.put(`${BASE_URL}/posts/${postId}/like`, body, {
+        headers: {
+          Authorization: window.localStorage.getItem("labeddit-token"),
+        },
+      });
+      findPosts();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     
     <PostContainer>
-        <Title>Enviado por </Title>
+        <Title>Enviado por {post.creator.name}</Title>
         <Content>{post.content}</Content>
         <LowerBar>
             <LikeDiv>
                 <Button>
-                    <Icon src={Like}></Icon>
+                    <Icon onClick={() => like(post.id)} src={Like}></Icon>
                 </Button>
-                <Text>456</Text>
+                <Text>{post.likes}</Text>
                 <Button>
-                    <Icon src={Dislike}></Icon>
+                    <Icon onClick={() => dislike(post.id)} src={Dislike}></Icon>
                 </Button>
+                <Text>{post.dislikes}</Text>
                 
             </LikeDiv>
             <CommentDiv>
-                <Button onClick={() => {goToPost(navigate)}}>
+                <Button onClick={() => {goToPost(navigate, post.id)}}>
                 <Icon src={Comment}></Icon>
                 </Button>
-                <Text>23</Text>
+               
             </CommentDiv>
-            <Button>Delete</Button>
         </LowerBar>
     </PostContainer>
   )
