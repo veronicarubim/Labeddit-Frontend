@@ -1,6 +1,6 @@
 # Labeddit-Frontend
 
-<img src={https://pbs.twimg.com/media/Fu673dJX0AI93A6?format=jpg&name=4096x4096}/>
+<img src="https://pbs.twimg.com/media/Fu673dJX0AI93A6?format=jpg&name=4096x4096" />
 
 Repositório do projeto fullstack da Labenu.
 
