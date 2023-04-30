@@ -27,7 +27,7 @@ Para acessar o repositório do backend da Labeddit, clique <a href="https://gith
   # Deploy
   
   O projeto está disponível para visualização na plataforma vercel.
-  Clique <a href={https://labeddit-frontend-24z4u0ihr-veronicarubim.vercel.app/}>aqui</a> para acesssar.
+  Clique <a href='https://labeddit-frontend-24z4u0ihr-veronicarubim.vercel.app/'>aqui</a> para acesssar.
   
   # Tecnologias
   
